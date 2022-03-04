@@ -4,8 +4,8 @@ from pathlib import Path
 this_directory = Path(__file__).parent
 
 setup(name='keras-pruning',
-      version='0.9.0',
-      description='PyTorch training manager (v0.9 Beta1)',
+      version='0.9.0b',
+      description='PyTorch training manager (Public Beta 1)',
       author='Kison Ho',
       author_email='unfit-gothic.0q@icloud.com',
       packages=['keras_pruning', 'keras_pruning.sparsity', 'keras_pruning.train'],
