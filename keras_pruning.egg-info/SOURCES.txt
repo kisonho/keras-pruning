@@ -1,0 +1,14 @@
+pyproject.toml
+setup.py
+keras_pruning.egg-info/PKG-INFO
+keras_pruning.egg-info/SOURCES.txt
+keras_pruning.egg-info/dependency_links.txt
+keras_pruning.egg-info/top_level.txt
+lib/__init__.py
+lib/sparsity/__init__.py
+lib/sparsity/layers.py
+lib/sparsity/models.py
+lib/sparsity/prune.py
+lib/train/__init__.py
+lib/train/callbacks.py
+lib/train/schedules.py
