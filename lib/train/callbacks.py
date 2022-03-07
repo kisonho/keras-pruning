@@ -1,5 +1,6 @@
 # import typing modules
-from typing import Optional
+from typing import Optional, Union
+from enum import Enum
 
 # import required modules
 from tensorflow.keras import Model
@@ -8,6 +9,10 @@ from tensorflow.keras.callbacks import * # type: ignore
 # import call modules
 from ..sparsity.prune import PruningMethod
 from .schedules import PruningScheduler
+
+class UpdateFrequency(Enum):
+    BATCH = 1
+    EPOCH = 0
 
 class UpdatePruningMask(Callback):
     """
@@ -22,8 +27,9 @@ class UpdatePruningMask(Callback):
     method: PruningMethod
     model: Optional[Model] = None
     schedule: Optional[PruningScheduler] = None
+    update_freq: Union[int, UpdateFrequency]
 
-    def __init__(self, method: PruningMethod, schedule: Optional[PruningScheduler]=None) -> None:
+    def __init__(self, method: PruningMethod, schedule: Optional[PruningScheduler]=None, update_freq: Union[int, UpdateFrequency] = UpdateFrequency.EPOCH) -> None:
         """
         Constructor
 
@@ -32,8 +38,9 @@ class UpdatePruningMask(Callback):
         """
         self.method = method
         self.schedule = schedule
+        self.update_freq = update_freq
 
-    def on_epoch_end(self, *args, **kwargs) -> None:
+    def _update(self) -> None:
         # update pruning ratio
         if self.schedule is not None:
             new_pruning_ratio = self.schedule.update()
@@ -43,3 +50,14 @@ class UpdatePruningMask(Callback):
         if self.model is not None and new_pruning_ratio is not None:
             self.method.pruning_ratio = new_pruning_ratio
             self.method.compute_mask(self.model)
+
+    def on_batch_end(self, batch: int, **kwargs):
+        if not isinstance(self.update_freq, UpdateFrequency):
+            if batch % self.update_freq == 0: self._update()
+        elif self.update_freq == UpdateFrequency.BATCH:
+            self._update()
+
+    def on_epoch_end(self, *args, **kwargs) -> None:
+        # update pruning ratio
+        if self.update_freq == UpdateFrequency.EPOCH:
+            self._update()
