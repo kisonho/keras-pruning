@@ -150,5 +150,4 @@ def remove(pruned_model: Model, pruning_method: Type[PruningMethod]=PruningMetho
     """
     # clone existing model
     model: Model = models.clone_model(pruned_model, clone_function=pruning_method.remove)
-    del pruned_model
     return model
