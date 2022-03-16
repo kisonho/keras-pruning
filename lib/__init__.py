@@ -1,3 +1,3 @@
-from . import sparsity
+from . import core, sparsity, train
 
-version = "0.9.2"
+version = "0.9.3"

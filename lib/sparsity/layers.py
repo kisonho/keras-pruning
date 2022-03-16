@@ -1,10 +1,9 @@
 # import typing modules
 from __future__ import annotations
-from typing import Any, Callable, Optional, Protocol, Type, runtime_checkable
+from ..core.typing import Any, Callable, Optional, Protocol, Type, runtime_checkable
 
 # import required modules
-import abc, tensorflow as tf
-from tensorflow.keras import layers
+from ..core import abc, layers, tensorflow as tf
 
 @runtime_checkable
 class _PrunableLayer(Protocol):

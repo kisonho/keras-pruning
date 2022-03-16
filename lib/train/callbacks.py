@@ -1,14 +1,8 @@
-# import typing modules
-from typing import Optional, Union
-from enum import Enum
-
-# import required modules
-from tensorflow.keras import Model
-from tensorflow.keras.callbacks import * # type: ignore
-
-# import call modules
+from ..core.typing import Enum, Optional, Union
+from ..core import Model
 from ..sparsity.prune import PruningMethod
 from .schedules import PruningScheduler
+from tensorflow.keras.callbacks import * # type: ignore
 
 class UpdateFrequency(Enum):
     BATCH = 1

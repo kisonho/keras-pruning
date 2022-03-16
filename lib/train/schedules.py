@@ -1,9 +1,7 @@
 # import typing modules
 from __future__ import annotations
-from typing import Optional
-
-# import required modules
-import abc
+from ..core import abc
+from ..core.typing import Optional
 
 class PruningScheduler:
     """

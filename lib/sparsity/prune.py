@@ -3,8 +3,8 @@ from __future__ import annotations
 from typing import Type, Union
 
 # import required modules
-import abc, tensorflow as tf
-from tensorflow.keras import layers, models, Model
+from ..core import abc, tensorflow as tf
+from ..core import layers, models, Model
 
 # import core modules
 from .layers import _PrunableLayer, PrunedLayer
