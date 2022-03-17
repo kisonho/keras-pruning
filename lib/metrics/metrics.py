@@ -1,7 +1,7 @@
-from .core import tensorflow as tf
-from .core.typing import Any
-from .sparsity.prune import PruningMethod
-from tensorflow.keras.metrics import * # type: ignore
+from ..core import tensorflow as tf
+from ..core.typing import Any
+from ..sparsity.prune import PruningMethod
+from tensorflow.keras.metrics import Metric
 
 class PruningRatio(Metric):
     _method: PruningMethod
